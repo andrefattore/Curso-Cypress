@@ -99,32 +99,7 @@ beforeEach(() => {
   
 });
 
-
-describe('Combo Box',()=>{
-
-  //Antes de Tudo
-  before(() => {
-    //visita a página
-    cy.visit("https://wcaquino.me/cypress/componentes.html");
-  });
-  
-  //Antes de executar cada teste
-  beforeEach(() => {
-    //recarrega a página
-    cy.reload();
-  });
-  
-  
-    it('Validar Radio Buttons',()=>{
-      cy.get('#formSexoMasc').check()
-    });
-    
-  });
-
-
-
-
-describe('Manipulando Checkbox', ()=>{
+describe('Manipulando Combo box', ()=>{
 
   //Antes de Tudo
   before(() => {
@@ -140,10 +115,14 @@ describe('Manipulando Checkbox', ()=>{
 
   it('Combo',()=>{
   
-    //check all boxes
+    
     cy.get('[data-test="dataEscolaridade"]')
         .select('2o grau completo')
-        .should('have.value', '2o grau completo');
+        .should('have.value', '2graucomp'); //verificar o 'value' por meio das ferramentas de desenvolvedor
+    
+    cy.get('[data-test="dataEscolaridade"]')
+        .select('1graucomp')
+        .should('have.value', '1graucomp'); 
  
   });
   
