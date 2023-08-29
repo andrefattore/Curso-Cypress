@@ -51,4 +51,12 @@ describe("Esperas...", () => {
             .should('have.value','1');
     });
 
+    it('Should vs Then', ()=>{
+        cy.get('#buttonListDOM').then($el =>{
+            //console.log($el);
+            expect($el).to.have.length(1);
+            return 2;
+        }).and('have.id','buttonListDOM')
+    });
+
 });

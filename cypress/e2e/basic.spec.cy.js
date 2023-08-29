@@ -7,6 +7,11 @@ describe("Cypress básico", () => {
     //const title = cy.title();
     //console.log(title);
 
+    //imprimindo o titulo
+    cy.title().then(title=>{
+      console.log(title);
+    });
+
     //titulo deveria ser igual a 'Campo de treinamento'
     cy.title().should("be.equal", "Campo de Treinamento");
   });
