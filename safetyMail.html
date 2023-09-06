@@ -1,0 +1,53 @@
+<meta charset="utf-8" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<label class="control-label">E-mail</label>
+<input type="text" name="Email" value="" class="email" />
+<input type="submit" class="btn-teste" value="Validar E-mail" />
+
+<script>
+  let apiKey = "*****************************************"; //chave a API disponibilizada após assinatura
+  let tkOrigem = "*****************************************"; //origem disponibilizada após assinatura
+  $(".btn-teste").click(function () {
+    let email = btoa($(".email").val()); //O método btoa() cria uma string no formato Base64-encoded ASCII string a partir de uma string binária
+
+
+	/*a consulta é feita passando como parâmetros a chave da api, 
+	o ticket de origem e o e-mail codificado em formato base-64*/
+    let url = `https://optin.safetymails.com/main/safetyapi/${apiKey}/${tkOrigem}/${email}`; 
+    
+	//chamada assíncrona com ajax
+	$.ajax({
+      async: false,
+      type: "GET",
+      url: url,
+      timeout: 5000,
+      success: function (response) {
+        if (!response.Success) {
+          console.error("Response error", response);
+          return;
+        }
+        console.log("Response success", response);
+      },
+      statusCode: {
+        429: function () {
+          console.error("HTTPCode 429");
+        },
+        406: function () {
+          console.error("HTTPCode 406");
+        },
+        403: function () {
+          console.error("HTTPCode 403");
+        },
+        402: function () {
+          console.error("HTTPCode 402");
+        },
+        401: function () {
+          console.error("HTTPCode 401");
+        },
+        400: function () {
+          console.error("HTTPCode 400");
+        },
+      },
+    });
+  });
+</script>
